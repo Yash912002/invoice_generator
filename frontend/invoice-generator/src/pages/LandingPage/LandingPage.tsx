@@ -1,6 +1,10 @@
+import Header from "../../components/landing/Header"
+
 const LandingPage = () => {
   return (
-    <div>LandingPage</div>
+    <div className="text-gray-600 bg-[#ffffff]">
+      <Header />
+    </div>
   )
 }
 
