@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { FileTextIcon, XIcon, MenuIcon } from "lucide-react"
 import ProfileDropdown from "../layout/ProfileDropdown";
+import Button from "../ui/Button";
 
 
 const Header = () => {
@@ -16,6 +17,7 @@ const Header = () => {
   }
 
   const logout = () => { };
+  const navigate = useNavigate();
 
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
@@ -27,6 +29,7 @@ const Header = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, [])
+
 
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 bg-gray-100 
@@ -113,6 +116,62 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      {isMenuOpen && (
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a
+              href="#features"
+              className="block px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            >
+              Features
+            </a>
+
+            <a
+              href="#testimonials"
+              className="block px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            >
+              Testimonials
+            </a>
+
+            <a
+              href="#faq"
+              className="block px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            >
+              FAQ
+            </a>
+
+            <div className="border-t border-gray-200 my-2"></div>
+
+            {isAuthenticated ? (
+              <div className="p-4">
+                <Button
+                  onClick={() => navigate("/dashboard")}
+                  className="w-full"
+                >
+                  Go to Dashboard
+                </Button>
+              </div>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="block px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 font-medium"
+                >
+                  Login
+                </Link>
+
+                <Link
+                  to="/signup"
+                  className="block w-full text-left bg-gray-900 hover:bg-gray-800 text-white px-4 py-3 rounded-lg font-medium"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   )
 }
