@@ -37,7 +37,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="mt-16 relative max-w-5xl mx-auto">
+        <div className="mt-12 sm:mt-16 relative max-w-5xl mx-auto">
           <img
             src={HERO_IMG}
             alt="Invoice App Screenshot"
