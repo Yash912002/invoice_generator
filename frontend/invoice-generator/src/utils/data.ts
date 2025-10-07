@@ -55,3 +55,41 @@ export const TESTOMONIALS = [
 		avatar: "https://placehold.co/100x100/000000/ffffff?text=PJ",
 	},
 ];
+
+export const FAQS = [
+	{
+		question: "How does the AI invoice creation work?",
+		answer:
+			"Simply upload or paste any text that contains billing details—like an email, message, or receipt—and our AI automatically extracts and structures it into a professional invoice.",
+	},
+	{
+		question: "Can I edit the generated invoice before downloading?",
+		answer:
+			"Yes, you can review and modify all fields such as client details, items, and totals before finalizing or downloading the invoice.",
+	},
+	{
+		question: "Which file formats are supported for download?",
+		answer:
+			"You can download invoices as PDF or PNG. More formats like DOCX and CSV are coming soon.",
+	},
+	{
+		question: "Is my data stored or shared?",
+		answer:
+			"No, your data is processed securely and never stored or shared. All invoice generation happens in a privacy-first environment.",
+	},
+	{
+		question: "Can I generate invoices in different currencies or languages?",
+		answer:
+			"Yes, you can customize currency symbols, tax formats, and even generate invoices in multiple languages.",
+	},
+	{
+		question: "Do I need to create an account to use the tool?",
+		answer:
+			"No account is required for basic usage. However, creating an account lets you save, track, and manage your invoices easily.",
+	},
+	{
+		question: "Can I integrate this with my existing system?",
+		answer:
+			"Yes, our API allows easy integration with your CRM, ERP, or accounting software for automated invoice generation.",
+	},
+];
