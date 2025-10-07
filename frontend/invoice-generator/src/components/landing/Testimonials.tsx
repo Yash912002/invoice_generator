@@ -17,18 +17,30 @@ const Testimonials = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {TESTOMONIALS.map((testimonial, index) => (
             <div key={index} className="bg-gray-50 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 relative">
-              <div className="absolute -top-4 left-8 w-8 h-8 bg-gradient-to-br from-blue-950 to-blue-900 rounded-full">
-                <QuoteIcon className="" />
+              <div
+                className="absolute -top-4 left-8 w-8 h-8 bg-gradient-to-br from-blue-950 to-blue-900 rounded-full text-white flex items-center justify-center"
+              >
+                <QuoteIcon className="w-5 h-5" />
               </div>
 
-              <p className="">"{testimonial.quote}"</p>
+              <p className="text-gray-700 mb-6 leading-relaxed italic text-lg">
+                "{testimonial.quote}"
+              </p>
 
-              <div className="">
-                <img src={testimonial.avatar} alt={testimonial.author} className="" />
+              <div className="flex items-center space-x-4">
+                <img
+                  src={testimonial.avatar}
+                  alt={testimonial.author}
+                  className="w-12 h-12 rounded-full object-cover border-2 border-gray-300"
+                />
 
-                <div className="">
-                  <p className="">{testimonial.author}</p>
-                  <p className="">{testimonial.title}</p>
+                <div className="flex-1">
+                  <p className="font-semibold text-gray-900">
+                    {testimonial.author}
+                  </p>
+                  <p className="text-gray-500 text-sm">
+                    {testimonial.title}
+                  </p>
                 </div>
               </div>
             </div>
