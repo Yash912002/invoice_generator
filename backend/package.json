@@ -1,0 +1,49 @@
+{
+	"name": "invoice-generator-backend",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.ts",
+	"type": "module",
+	"scripts": {
+		"dist": "npx tsc",
+		"dev": "tsx watch server.ts",
+		"start": "node dist/server.js",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"format:check": "prettier . --check",
+		"format:fix": "prettier . --write"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.34.0",
+		"@types/cors": "^2.8.19",
+		"@types/express": "^5.0.3",
+		"@types/jsonwebtoken": "^9.0.10",
+		"@types/node": "^24.3.0",
+		"eslint": "^9.34.0",
+		"eslint-config-prettier": "^10.1.8",
+		"nodemon": "^3.1.10",
+		"prettier": "3.6.2",
+		"ts-node": "^10.9.2",
+		"tsx": "^4.20.5",
+		"typescript": "^5.9.2",
+		"typescript-eslint": "^8.41.0"
+	},
+	"dependencies": {
+		"@google/genai": "^1.23.0",
+		"bcryptjs": "^3.0.2",
+		"cors": "^2.8.5",
+		"cross-env": "^10.0.0",
+		"dotenv": "^17.2.3",
+		"dotenv-flow": "^4.1.0",
+		"express": "^5.1.0",
+		"helmet": "^8.1.0",
+		"jsonwebtoken": "^9.0.2",
+		"mongoose": "^8.18.0",
+		"multer": "^2.0.2",
+		"winston": "^3.17.0",
+		"winston-mongodb": "^7.0.1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
