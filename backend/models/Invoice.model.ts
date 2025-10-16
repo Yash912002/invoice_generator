@@ -45,6 +45,8 @@ export interface IInvoice extends Document {
 	subtotal: number;
 	taxTotal: number;
 	total: number;
+	createdAt: Date;
+	updatedAt: Date;
 }
 
 const invoiceSchema = new Schema<IInvoice>(
