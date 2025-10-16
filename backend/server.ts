@@ -6,6 +6,7 @@ import path from "path";
 import { connectDB } from "./config/db.js";
 import { authRouter } from "./routes/auth.routes.js";
 import { invoiceRouter } from "./routes/invoices.routes.js";
+import { aiRouter } from "./routes/ai.routes.js";
 
 const app: Application = express();
 
@@ -26,6 +27,7 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRouter);
 app.use("/api/invoices", invoiceRouter);
+app.use("/api/ai", aiRouter);
 
 // Start the server
 const PORT = process.env.PORT || 4000;
