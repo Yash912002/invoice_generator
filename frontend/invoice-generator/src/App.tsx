@@ -17,10 +17,11 @@ import InvoiceDetail from "./pages/Invoices/InvoiceDetail";
 import LandingPage from "./pages/LandingPage/LandingPage";
 
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <div>
+    <AuthProvider>
       <Router>
         <Routes>
           {/* Public routes */}
@@ -51,8 +52,8 @@ function App() {
           }
         }}
       />
-    </div>
+    </AuthProvider>
   )
 }
 
-export default App
+export default App;
