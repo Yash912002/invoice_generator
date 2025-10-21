@@ -1,15 +1,15 @@
 import { Navigate, Outlet } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
+import { useAuth } from "../../hooks/useAuth";
 
 type Props = {
   children?: React.ReactNode
 }
 
 const ProtectedRoute = ({ children }: Props) => {
-  const isAuthenticated = true;
-  const isLoading = false;
+  const { isAuthenticated, loading } = useAuth();
 
-  if (isLoading) return <div>Loading...</div>
+  if (loading) return <div>Loading...</div>
   if (!isAuthenticated) return <Navigate to="/login" replace />
 
   return (
