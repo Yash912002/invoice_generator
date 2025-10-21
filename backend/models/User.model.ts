@@ -28,7 +28,6 @@ const userSchema = new Schema<IUser>(
 			type: String,
 			required: true,
 			minlength: 6,
-			select: false,
 		},
 		businessName: {
 			type: String,
@@ -48,7 +47,7 @@ const userSchema = new Schema<IUser>(
 
 // Password hashing middlware
 userSchema.pre("save", async function (next) {
-	if (!this.isModified(this.password)) return next();
+	if (!this.isModified("password")) return next();
 
 	const hashedPassword = await bcrypt.hash(this.password, 10);
 	this.password = hashedPassword;
@@ -56,7 +55,6 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.methods.matchPassword = async function (
-	// this: IUser,
 	password: string
 ): Promise<boolean> {
 	// Ensure this.password is defined
