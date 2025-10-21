@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom"
+import { useAuth } from "../../hooks/useAuth";
 import HERO_IMG from "../../assets/hero-img.png"
 
 const Hero = () => {
-  const isAuthenticated = false;
+  const { isAuthenticated } = useAuth();
   return (
     <section className="relative bg-[#fbfbfb] overflow-hidden">
       <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:60px_60px]"></div>
@@ -49,4 +50,4 @@ const Hero = () => {
   )
 }
 
-export default Hero
+export default Hero;
