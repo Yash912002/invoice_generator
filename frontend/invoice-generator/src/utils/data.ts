@@ -1,8 +1,11 @@
 import {
 	BarChart2Icon,
 	FileTextIcon,
+	LayoutDashboardIcon,
 	MailIcon,
+	PlusIcon,
 	SparklesIcon,
+	UserIcon,
 } from "lucide-react";
 
 export const FEATURES = [
@@ -92,4 +95,12 @@ export const FAQS = [
 		answer:
 			"Yes, our API allows easy integration with your CRM, ERP, or accounting software for automated invoice generation.",
 	},
+];
+
+// Navigation items config
+export const NAVIGATION_MENU = [
+	{ id: "dashboard", name: "Dashboard", icon: LayoutDashboardIcon },
+	{ id: "invoices", name: "Invoices", icon: FileTextIcon },
+	{ id: "invoices/new", name: "Create Invoice", icon: PlusIcon },
+	{ id: "profile", name: "Profile", icon: UserIcon },
 ];
