@@ -88,7 +88,12 @@ export const createInvoice = async (req: AuthRequest, res: Response) => {
 
 export const getInvoices = async (req: AuthRequest, res: Response) => {
 	try {
-		const invoices = await InvoiceModel.find().populate("user", "name email");
+		const invoices = await InvoiceModel.find({ user: req.user?._id }).populate(
+			"user",
+			"name email"
+		);
+		console.log(invoices);
+
 		res.status(200).json({
 			success: true,
 			message: "Fetched all the invoices successfully",
@@ -115,6 +120,13 @@ export const getInvoiceById = async (req: AuthRequest, res: Response) => {
 			return res.status(404).json({
 				success: false,
 				message: "Invoice not found",
+			});
+		}
+
+		if (invoice.user !== req.user?._id) {
+			return res.status(401).json({
+				success: false,
+				message: "Not Authorized",
 			});
 		}
 
