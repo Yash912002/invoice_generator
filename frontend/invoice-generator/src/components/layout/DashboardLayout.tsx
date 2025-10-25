@@ -38,10 +38,10 @@ const NavigationItem = ({
   return (
     <button
       onClick={() => onClick(item.id)}
-      className={`w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 
+      className={`w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200
         ${isActive
           ? "bg-blue-50 text-blue-900 shadow-sm shadow-blue-50"
-          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          : "text-gray-600 hover:bg-blue-100 hover:text-gray-900"
         } flex items-center gap-3 rounded-md p-2 cursor-pointer transition`
       }
     >
@@ -160,7 +160,7 @@ const DashboardLayout = ({ children, activeMenu }: Props) => {
         {/* Ḷogout */}
         <div className="absolute bottom-4 left-4 right-4">
           <button
-            className="w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all duration-300"
+            className="w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg cursor-pointer text-gray-600 hover:bg-blue-100 hover:text-gray-900 transition-all duration-300"
             onClick={logout}
           >
             <LogOutIcon className="h-5 w-5 shrink-0 text-gray-500" />
@@ -182,7 +182,7 @@ const DashboardLayout = ({ children, activeMenu }: Props) => {
         ${isMobile ? "ml-0" : sidebarCollapsed ? "ml-16" : "ml-64"}`}
       >
         {/* Top Navbar */}
-        <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 h-16 flex items-center justify-between px-6 sticky top-8 z-30">
+        <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 h-16 flex items-center justify-between px-6 sticky z-30">
           <div className="flex items-center space-x-4">
             {isMobile && (
               <button
