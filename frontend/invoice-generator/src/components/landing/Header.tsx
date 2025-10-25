@@ -3,20 +3,14 @@ import { Link, useNavigate } from "react-router-dom"
 import { FileTextIcon, XIcon, MenuIcon } from "lucide-react"
 import ProfileDropdown from "../layout/ProfileDropdown";
 import Button from "../ui/Button";
+import { useAuth } from "../../hooks/useAuth";
 
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const isAuthenticated = true;
-  const user = {
-    name: "Yash",
-    email: "yash@gmail.com",
-    avatar: ""
-  }
-
-  const logout = () => { };
+  const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
 
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
@@ -43,7 +37,9 @@ const Header = () => {
             <div className="w-8 h-8 bg-blue-900 rounded-md flex items-center justify-center">
               <FileTextIcon className="w-4 h-4 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900"> AI Invoice app</span>
+            <span className="text-xl font-bold text-gray-900">
+              AI Invoice app
+            </span>
 
           </div>
 
@@ -176,4 +172,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Header;
