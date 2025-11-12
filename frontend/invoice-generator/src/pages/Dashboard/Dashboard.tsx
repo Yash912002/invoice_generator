@@ -1,16 +1,13 @@
-import { useEffect, useState } from "react";
-import axiosInstance from "../../utils/axiosInstance";
-import { API_PATHS } from "../../utils/apiPath";
-import {
-  Loader2Icon,
-  FileTextIcon,
-  DollarSignIcon,
-  PlusIcon
-} from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import moment from "moment";
-import Button from "../../components/ui/Button";
-import { AIInsightsCard } from "../../components/AIInsightsCard";
+import { DollarSignIcon, FileTextIcon, Loader2Icon, PlusIcon } from 'lucide-react';
+import moment from 'moment';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { AIInsightsCard } from '../../components/AIInsightsCard';
+import Button from '../../components/ui/Button';
+import { API_PATHS } from '../../utils/apiPath';
+import axiosInstance from '../../utils/axiosInstance';
+import type { IInvoice } from '../../types/invoice';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -19,7 +16,7 @@ const Dashboard = () => {
     totalUnpaid: 0,
   });
 
-  const [recentInvoices, setRecentInvoices] = useState([]);
+  const [recentInvoices, setRecentInvoices] = useState<IInvoice[]>([]);
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
@@ -28,7 +25,7 @@ const Dashboard = () => {
     const fetchDashboardData = async () => {
       try {
         const response = await axiosInstance.get(API_PATHS.INVOICE.GET_ALL_INVOICES);
-        const invoices = response.data.data;
+        const invoices: IInvoice[] = response.data.data;
         const totalInvoices = invoices.length;
 
         const totalPaid = invoices
@@ -43,9 +40,13 @@ const Dashboard = () => {
 
         setRecentInvoices(
           invoices
-            .sort((a, b) => new Date(b.invoiceDate) - new Date(a.invoiceDate))
+            .sort(
+              (a, b) =>
+                new Date(b.invoiceDate).getTime() -
+                new Date(a.invoiceDate).getTime()
+            )
             .slice(0, 5)
-        )
+        );
       } catch (error) {
         console.error("Failed to fetch dashboard data. ", error);
       } finally {
@@ -81,7 +82,9 @@ const Dashboard = () => {
     blue: { bg: "bg-blue-100", text: "text-blue-600" },
     emerald: { bg: "bg-emerald-100", text: "text-emerald-600" },
     red: { bg: "bg-red-100", text: "text-red-600" },
-  };
+  } as const;
+
+  type StatColor = keyof typeof colorClasses;
 
   if (loading) {
     <div className="flex items-center justify-center h-96">
@@ -90,36 +93,42 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="">
+    <div className="space-y-8">
       <div>
-        <h2 className="">Dashboard</h2>
-        <p className="">
+        <h2 className="textxl font-semibold text-slate-900">
+          Dashboard
+        </h2>
+        <p className="text-sm text-slate-600 mt-1">
           A quick overview of your business finance.
         </p>
       </div>
 
       {/* Stats Cards */}
-      <div className="">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {statsData.map((stat, index) => (
           <div
             key={index}
-            className=""
+            className="bg-white p-4 rounded-xl border border-slate-200 shadow-lg shadow-gray-50"
           >
-            <div className="">
+            <div className="flex items-center">
               <div
                 className={`flex shrink-0 w-12 h-12
-                  ${colorClasses[stat.color].bg} rounded-lg flex items-center justify-center`}
+                  ${colorClasses[stat.color as StatColor].bg} 
+                  rounded-lg flex items-center justify-center`
+                }
               >
                 <stat.icon
-                  className={`w-6 h-6 ${colorClasses[stat.color].text}`}
+                  className={`w-6 h-6 
+                    ${colorClasses[stat.color as StatColor].text}`
+                  }
                 />
               </div>
 
-              <div className="">
-                <div className="">
+              <div className="ml-4 min-w-0">
+                <div className="text-sm font-medium text-slate-500 truncate">
                   {stat.label}
                 </div>
-                <div className="">
+                <div className="text-2xl font-bold text-slate-900 break-words">
                   {stat.value}
                 </div>
               </div>
@@ -132,9 +141,9 @@ const Dashboard = () => {
       <AIInsightsCard />
 
       {/* Recent Invoices */}
-      <div className="">
-        <div className="">
-          <h2 className="">
+      <div className="w-full bg-white border border-slate-200 rounded-lg shadow-sm shadow-gray-100 overflow-hidden">
+        <div className="px-4 sm:px-6 py-4 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
+          <h2 className="text-lg font-semibold text-slate-900">
             Recent Invoices
           </h2>
 
@@ -144,46 +153,46 @@ const Dashboard = () => {
         </div>
 
         {recentInvoices.length > 0 ? (
-          <div className="">
-            <table className="">
-              <thead className="">
+          <div className="w-[98vw] md:w-auto overflow-x-auto">
+            <table className="w-full min-w-[600px] divide-y divide-slate-200">
+              <thead className="bg-slate-50">
                 <tr>
-                  <th className="">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
                     Client
                   </th>
-                  <th className="">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
                     Amount
                   </th>
-                  <th className="">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
                     Due date
                   </th>
                 </tr>
               </thead>
 
-              <tbody className="">
+              <tbody className="bg-white divide-y divide-slate-200">
                 {recentInvoices.map((invoice) => (
                   <tr
                     key={invoice._id}
-                    className=""
+                    className="hover:bg-slate-50 cursor-pointer"
                     onClick={() => navigate(`/invoices/${invoice._id}`)}
                   >
-                    <td className="">
-                      <div className="">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm font-medium text-slate-900">
                         {invoice.billTo.clientName}
                       </div>
-                      <div className="">
+                      <div className="text-sm text-slate-500">
                         #{invoice.invoiceNumber}
                       </div>
                     </td>
 
-                    <td className="">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-800">
                       ${invoice.total.toFixed(2)}
                     </td>
 
-                    <td className="">
+                    <td className="px-6 py-4 whitespace-nowrap">
                       <span
                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
                           ${invoice.status === "Paid" ?
@@ -198,7 +207,7 @@ const Dashboard = () => {
                       </span>
                     </td>
 
-                    <td className="">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
                       {moment(invoice.dueDate).format("MMM D, YYYY")}
                     </td>
                   </tr>
@@ -207,16 +216,16 @@ const Dashboard = () => {
             </table>
           </div>
         ) : (
-          <div className="">
-            <div className="">
-              <FileTextIcon className="" />
+          <div className="flex flex-col items-center justify-center py-12 text-center">
+            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-4">
+              <FileTextIcon className="w-8 h-8 text-slate-400" />
             </div>
 
-            <h3 className="">
+            <h3 className="text-lg font-medium text-slate-900 mb-2">
               No invoices yet
             </h3>
 
-            <p className="">
+            <p className="text-slate-500 mb-6 max-w-md">
               You haven't created any invoices yet. Get started by creating your first one.
             </p>
 
