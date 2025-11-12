@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
+
 import UserModel from "../models/User.model.js";
+
 import type { Request, Response } from "express";
 import type { AuthRequest } from "../middlewares/auth.middleware.js";
 
@@ -10,9 +12,17 @@ const generateToken = (id: string) => {
 	});
 };
 
+type RegisterUserSchema = {
+	name: string;
+	email: string;
+	password: string;
+};
+
+type LoginUserSchema = Omit<RegisterUserSchema, "name">;
+
 export const registerUser = async (req: Request, res: Response) => {
 	try {
-		const { name, email, password } = req.body;
+		const { name, email, password }: RegisterUserSchema = req.body;
 
 		if (!name || !email || !password) {
 			return res
@@ -53,7 +63,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
 export const loginUser = async (req: Request, res: Response) => {
 	try {
-		const { email, password } = req.body;
+		const { email, password }: LoginUserSchema = req.body;
 
 		if (!email || !password) {
 			return res
