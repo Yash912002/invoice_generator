@@ -10,4 +10,4 @@ export const aiRouter: Router = Router();
 
 aiRouter.route("/parse-text").post(protect, parseInvoiceFromText);
 aiRouter.route("/generate-reminder").post(protect, generateReminderEmail);
-aiRouter.route("/dashboard-summary").post(protect, getDashboardSummary);
+aiRouter.route("/dashboard-summary").get(protect, getDashboardSummary);
