@@ -1,8 +1,17 @@
 import { useState, useEffect } from "react";
 import { AuthContext } from "../hooks/useAuth";
 
+export interface IUser {
+  name?: string;
+  email: string;
+  password: string;
+  businessName?: string;
+  address?: string;
+  phone?: string;
+}
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -26,7 +35,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
-  const login = (userData: object, token: string) => {
+  const login = (userData: IUser, token: string) => {
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(userData));
 
@@ -44,7 +53,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     window.location.href = "/"
   }
 
-  const updateUser = (updateUserData: object) => {
+  const updateUser = (updateUserData: IUser) => {
     const newUserData = { ...user, ...updateUserData };
     localStorage.setItem("user", JSON.stringify(newUserData));
     setUser(newUserData);
