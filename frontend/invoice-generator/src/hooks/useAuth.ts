@@ -1,13 +1,14 @@
 import { createContext, useContext } from "react";
+import type { IUser } from "../context/AuthContext";
 
 type AuthContextType = {
-	user: object | null;
+	user: IUser | null;
 	loading: boolean;
 	isAuthenticated: boolean;
 	checkAuthStatus: () => void;
-	login: (userData: object, token: string) => void;
+	login: (userData: IUser, token: string) => void;
 	logout: () => void;
-	updateUser: (updateUserData: object) => void;
+	updateUser: (updateUserData: IUser) => void;
 };
 
 export const AuthContext = createContext<AuthContextType | null>(null);
