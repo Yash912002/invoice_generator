@@ -3,15 +3,15 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import moment from 'moment';
 import Button from '../../components/ui/Button';
 import InputField from '../../components/ui/InputField';
 import SelectField from '../../components/ui/SelectField';
 import TextareaField from '../../components/ui/TextareaField';
 import { useAuth } from '../../hooks/useAuth';
+import type { CreateInvoiceSchema, IInvoice } from '../../types/invoice';
 import { API_PATHS } from '../../utils/apiPath';
 import axiosInstance from '../../utils/axiosInstance';
-import type { CreateInvoiceSchema, IInvoice } from '../../types/invoice';
-// import moment from 'moment';
 
 const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
   const navigate = useNavigate();
@@ -65,10 +65,10 @@ const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
     if (existingInvoice) {
       setFormData({
         ...existingInvoice,
-        // invoiceDate: moment(existingInvoice.invoiceDate).format("YYYY-MM-DD"),
-        // dueDate: moment(existingInvoice.dueDate).format("YYYY-MM-DD"),
-        invoiceDate: new Date(existingInvoice.invoiceDate),
-        dueDate: new Date(existingInvoice.dueDate),
+        invoiceDate: moment(existingInvoice.invoiceDate).format("YYYY-MM-DD"),
+        dueDate: moment(existingInvoice.dueDate).format("YYYY-MM-DD"),
+        // invoiceDate: new Date(existingInvoice.invoiceDate),
+        // dueDate: new Date(existingInvoice.dueDate),
       });
     } else {
       const generateNewInvoiceNumber = async () => {
@@ -100,7 +100,7 @@ const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
   }, [existingInvoice, location.state?.aiData]);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
     section?: "billFrom" | "billTo" | null,
     index?: number
   ) => {
@@ -128,8 +128,6 @@ const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
       }))
     }
   }
-
-  console.log(typeof formData.invoiceDate);
 
   const handleAddItem = () => {
     setFormData({
@@ -179,6 +177,7 @@ const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
       total
     };
 
+    
     if (onSave) {
       await onSave(finalFormData);
     } else {
@@ -218,12 +217,12 @@ const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
             disabled
           />
 
-          {/* FIXME: formData.invoiceDate.toISOString is not a function. */}
           <InputField
             label="Invoice Date"
             type="date"
             name="invoiceDate"
-            value={formData.invoiceDate.toISOString().split("T")[0]}
+            // value={formData.invoiceDate.toISOString().split("T")[0]}
+            value={formData.invoiceDate}
             onChange={handleInputChange}
           />
 
@@ -231,7 +230,8 @@ const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
             label="Due Date"
             type="date"
             name="dueDate"
-            value={formData.dueDate.toISOString().split("T")[0]}
+            // value={formData.dueDate.toISOString().split("T")[0]}
+            value={formData.dueDate}
             onChange={handleInputChange}
           />
         </div>
@@ -358,7 +358,8 @@ const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
                   <td className="px-2 sm:px-6 py-4">
                     <input
                       type="number"
-                      name="Quantity"
+                      name="quantity"
+                      min={1}
                       value={item.quantity}
                       onChange={(e) => handleInputChange(e, null, index)}
                       className="w-full h-10 px-3 py-2 border border-slate-100 rounded-lg bg-white text-slate-900 placeholder-slate-400"
@@ -369,7 +370,8 @@ const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
                   <td className="px-2 sm:px-6 py-4">
                     <input
                       type="number"
-                      name="Unit Price"
+                      name="unitPrice"
+                      min={0}
                       value={item.unitPrice}
                       onChange={(e) => handleInputChange(e, null, index)}
                       className="w-full h-10 px-3 py-2 border border-slate-100 rounded-lg bg-white text-slate-900 placeholder-slate-400"
@@ -381,6 +383,7 @@ const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
                     <input
                       type="number"
                       name="taxPercent"
+                      min={0}
                       value={item.taxPercent}
                       onChange={(e) => handleInputChange(e, null, index)}
                       className="w-full h-10 px-3 py-2 border border-slate-100 rounded-lg bg-white text-slate-900 placeholder-slate-400"
