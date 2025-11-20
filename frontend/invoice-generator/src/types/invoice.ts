@@ -9,8 +9,8 @@ interface IItem {
 export interface IInvoice {
   _id: string;
   invoiceNumber: string;
-  invoiceDate: Date;
-  dueDate: Date;
+  invoiceDate: string;
+  dueDate: string;
   billFrom: {
     businessName: string;
     email: string;
