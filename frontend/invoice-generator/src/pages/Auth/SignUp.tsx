@@ -180,7 +180,6 @@ const SignUp = () => {
         password: formData.password,
       });
 
-      console.log("Signup response: ", response);
       const data = response.data.data;
       const { token } = data;
 
@@ -207,13 +206,9 @@ const SignUp = () => {
         navigate("/dashboard");
       }
 
-    } catch (error: any) {
-      if (error.response && error.response.data && error.response.data.message) {
-        setError(error.response.data.message);
-      } else {
-        setError("Registration failed. Please try again.");
-      }
-      console.error("API Error: ", error.response || error);
+    } catch (error) {
+      setError("Registration failed. Please try again.");
+      console.error("API Error: ", error);
     } finally {
       setIsLoading(false);
     }
