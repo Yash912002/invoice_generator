@@ -5,10 +5,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import ReminderModal from '../../components/invoices/ReminderModal';
 import Button from '../../components/ui/Button';
+import type { IInvoice } from '../../types/invoice';
 import { API_PATHS } from '../../utils/apiPath';
 import axiosInstance from '../../utils/axiosInstance';
 import CreateInvoice from './CreateInvoice';
-import type { IInvoice } from '../../types/invoice';
 
 const InvoiceDetail = () => {
   const { id } = useParams();
@@ -19,15 +19,9 @@ const InvoiceDetail = () => {
   const [isReminderModalOpen, setIsReminderModalOpen] = useState(false);
   const invoiceRef = useRef(null);
 
-  if (!id) {
-    return (
-      <p className="text-center text-red-500">
-        Invalid invoice ID.
-      </p>
-    );
-  }
-
   useEffect(() => {
+    if (!id) return;
+
     const fetchInvoice = async () => {
       try {
         const response = await axiosInstance.get(API_PATHS.INVOICE.GET_INVOICE_BY_ID(id));
@@ -42,6 +36,14 @@ const InvoiceDetail = () => {
 
     fetchInvoice();
   }, [id])
+
+  if (!id) {
+    return (
+      <p className="text-center text-red-500">
+        Invalid invoice ID.
+      </p>
+    );
+  }
 
   const handleUpdate = async (formData: Partial<IInvoice>) => {
     try {
@@ -196,7 +198,7 @@ const InvoiceDetail = () => {
               <p className="text-slate-600">{invoice.billFrom.email}</p>
               <p className="text-slate-600">{invoice.billFrom.phone}</p>
             </div>
-            
+
             <div className="sm:text-right">
               <h3
                 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3"
