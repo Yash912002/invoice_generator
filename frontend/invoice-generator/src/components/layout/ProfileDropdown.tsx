@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 type ProfileDropdownProps = {
   isOpen: boolean;
   onToggle: (e: React.FormEvent) => void;
-  avatar: string;
+  // avatar: string;
   companyName: string;
   email: string;
   onLogout: () => void;
@@ -13,7 +13,7 @@ type ProfileDropdownProps = {
 const ProfileDropdown = ({
   isOpen,
   onToggle,
-  avatar,
+  // avatar,
   companyName,
   email,
   onLogout
@@ -26,7 +26,7 @@ const ProfileDropdown = ({
         onClick={onToggle}
         className="flex items-center space-x-3 p-2 rounded-xl cursor-pointer"
       >
-        {avatar ? (
+        {/* {avatar ? (
           <img
             src={avatar}
             alt="avatar"
@@ -38,7 +38,13 @@ const ProfileDropdown = ({
               {companyName.charAt(0).toUpperCase()}
             </span>
           </div>
-        )}
+        )} */}
+
+        <div className="h-8 w-8 bg-gradient-to-br from-blue-900 to-blue-800 rounded-xl flex items-center justify-center">
+          <span className="text-white font-semibold text-sm">
+            {companyName.charAt(0).toUpperCase()}
+          </span>
+        </div>
 
         <div className="hidden sm:block text-left">
           <p className="text-sm font-medium text-gray-900">{companyName}</p>
