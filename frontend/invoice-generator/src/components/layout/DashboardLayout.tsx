@@ -24,7 +24,7 @@ type NavigationItemProps = {
   },
   isActive: boolean;
   onClick: (id: string) => void;
-  isCollpased: boolean;
+  isCollapsed: boolean;
 }
 
 const NavigationItem = ({
@@ -215,7 +215,7 @@ const DashboardLayout = ({ children, activeMenu }: Props) => {
                 e.stopPropagation();
                 setProfileDropDownOpen(!profileDropDownOpen);
               }}
-              avatar={user?.avatar || ""}
+              // avatar={user?.avatar || ""}
               companyName={user?.name || ""}
               email={user?.email || ""}
               onLogout={logout}
