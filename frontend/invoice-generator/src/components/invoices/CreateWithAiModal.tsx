@@ -41,7 +41,7 @@ const CreateWithAiModal = ({
       navigate("/invoices/new", { state: { aiData: invoiceData } });
     } catch (error) {
       toast.error("Failed to generate invoice from text.");
-      console.log("AI parsing error", error);
+      console.error("AI parsing error", error);
     } finally {
       setIsLoading(false);
     }
