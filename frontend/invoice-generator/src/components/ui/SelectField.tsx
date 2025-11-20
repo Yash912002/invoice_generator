@@ -21,10 +21,10 @@ const Selectfield = ({ label, name, options, ...props }: SelectfieldProps) => {
       >
         {options.map((option) => (
           <option
-            key={option.value || option}
-            value={option.value || option}
+            key={option}
+            value={option}
           >
-            {option.label || option}
+            {option}
           </option>
         ))}
       </select>
