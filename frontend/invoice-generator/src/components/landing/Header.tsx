@@ -74,7 +74,7 @@ const Header = () => {
                   e.stopPropagation();
                   setProfileDropdownOpen(!profileDropdownOpen)
                 }}
-                avatar={user?.avatar || ""}
+                // avatar={user?.avatar || ""}
                 companyName={user?.name || ""}
                 email={user?.email || ""}
                 onLogout={logout}
