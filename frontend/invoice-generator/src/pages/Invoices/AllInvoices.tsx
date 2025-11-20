@@ -16,9 +16,9 @@ import { useNavigate } from 'react-router-dom';
 import CreateWithAiModal from '../../components/invoices/CreateWithAiModal';
 import ReminderModal from '../../components/invoices/ReminderModal';
 import Button from '../../components/ui/Button';
+import type { IInvoice } from '../../types/invoice';
 import { API_PATHS } from '../../utils/apiPath';
 import axiosInstance from '../../utils/axiosInstance';
-import type { IInvoice } from '../../types/invoice';
 
 const AllInvoices = () => {
 
@@ -39,7 +39,7 @@ const AllInvoices = () => {
       try {
         const response = await axiosInstance.get(API_PATHS.INVOICE.GET_ALL_INVOICES);
         setInvoices(
-          response.data.sort(
+          response.data.data.sort(
             (a: IInvoice, b: IInvoice) =>
               new Date(b.invoiceDate).getTime() -
               new Date(a.invoiceDate).getTime()
@@ -76,7 +76,7 @@ const AllInvoices = () => {
 
       const response = await axiosInstance.put(API_PATHS.INVOICE.UPDATE_INVOICE(invoice._id), updatedInvoice);
 
-      setInvoices(invoices.map(inv => inv._id === invoice._id ? response.data : inv));
+      setInvoices(invoices.map(inv => inv._id === invoice._id ? response.data.data : inv));
     } catch (error) {
       setError("Failed to update invoice status");
       console.error(error);
@@ -115,7 +115,7 @@ const AllInvoices = () => {
       <ReminderModal
         isOpen={isReminderModalOpen}
         onClose={() => setIsReminderModalOpen(false)}
-        invoiceId={selectedInvoiceId}
+        invoiceId={selectedInvoiceId!}
       />
 
       <div
@@ -247,7 +247,7 @@ const AllInvoices = () => {
                     <td
                       onClick={() => navigate(`/invoices/${invoice._id}`)}
                       className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 cursor-pointer"
-                    >
+                      >
                       {invoice.invoiceNumber}
                     </td>
 
