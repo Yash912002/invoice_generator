@@ -123,27 +123,24 @@ const Login = () => {
       const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, formData);
 
       if (response.status === 200) {
-        const { token } = response.data;
+        const { token } = response.data.data;
 
         if (token) {
           setSuccess("Login successful");
 
-          login(response.data, token);
+          login(response.data.data, token);
 
           // Redirect based on role
           setTimeout(() => {
             window.location.href = "/dashboard";
           }, 2000);
         } else {
-          setError(response.data.message || "Invalid credentials");
+          setError(response.data.data.message || "Invalid credentials");
         }
       }
-    } catch (error: any) {
-      if (error.response && error.response.data && error.response.data.message) {
-        setError(error.response.data.message);
-      } else {
-        setError("An error occured during login.");
-      }
+    } catch (error) {
+      console.error(error);
+      setError("An error occured during login.");
     } finally {
       setIsLoading(false);
     }
