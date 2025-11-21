@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { useAuth } from "../../hooks/useAuth";
-import HERO_IMG from "../../assets/hero-img.png"
+import HERO_IMG from "../../assets/dashboard.webp"
 
 const Hero = () => {
   const { isAuthenticated } = useAuth();
@@ -42,7 +42,7 @@ const Hero = () => {
           <img
             src={HERO_IMG}
             alt="Invoice App Screenshot"
-            className="rounded-2xl shadow-2xl shadow-gray-200 border-4 border-gray-200/20"
+            className="rounded-lg shadow-2xl shadow-gray-400/70"
           />
         </div>
       </div>
