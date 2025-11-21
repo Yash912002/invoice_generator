@@ -78,10 +78,10 @@ const Footer = () => {
 
             <ul className="space-y-2">
               <li>
-                <FooterLink to="/about">About us</FooterLink>
+                <FooterLink to="#">About us</FooterLink>
               </li>
               <li>
-                <FooterLink to="/contact">Contact us</FooterLink>
+                <FooterLink to="#">Contact us</FooterLink>
               </li>
             </ul>
           </div>
@@ -92,10 +92,10 @@ const Footer = () => {
             </h3>
             <ul className="space-y-2">
               <li>
-                <FooterLink to="/privacy"> Privacy Policy </FooterLink>
+                <FooterLink to="#"> Privacy Policy </FooterLink>
               </li>
               <li>
-                <FooterLink to="/terms"> Terms of Service </FooterLink>
+                <FooterLink to="#"> Terms of Service </FooterLink>
               </li>
             </ul>
           </div>
