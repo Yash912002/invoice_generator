@@ -18,7 +18,7 @@ const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
   const location = useLocation();
   const { user } = useAuth();
 
-  const [formData, setFormData] = useState<IInvoice>(existingInvoice || {
+  const [formData, setFormData] = useState(existingInvoice || {
     invoiceNumber: "",
     invoiceDate: new Date().toISOString().split("T")[0],
     dueDate: "",
@@ -148,16 +148,16 @@ const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
     setFormData({ ...formData, items: newItems });
   }
 
-  const { subTotal, taxTotal, total } = (() => {
-    let subTotal = 0, taxTotal = 0;
+  const { subtotal, taxTotal, total } = (() => {
+    let subtotal = 0, taxTotal = 0;
 
     formData.items.forEach((item) => {
       const itemTotal = (item.quantity || 0) * (item.unitPrice || 0);
-      subTotal += itemTotal;
+      subtotal += itemTotal;
       taxTotal += itemTotal * ((item.taxPercent || 0) / 100);
     });
 
-    return { subTotal, taxTotal, total: subTotal + taxTotal };
+    return { subtotal, taxTotal, total: subtotal + taxTotal };
   })();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -172,7 +172,7 @@ const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
     const finalFormData = {
       ...formData,
       items: itemsWithTotal,
-      subTotal,
+      subtotal,
       taxTotal,
       total
     };
@@ -456,7 +456,7 @@ const CreateInvoice = ({ existingInvoice, onSave }: CreateInvoiceSchema) => {
           <div className="space-y-4">
             <div className="flex justify-between text-sm text-slate-600">
               <p>Subtotal :</p>
-              <p>${subTotal.toFixed(2)}</p>
+              <p>${subtotal.toFixed(2)}</p>
             </div>
 
             <div className="flex justify-between text-sm text-slate-600">
