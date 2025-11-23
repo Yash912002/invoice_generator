@@ -35,6 +35,6 @@ export interface IInvoice {
 }
 
 export interface CreateInvoiceSchema {
-  existingInvoice: IInvoice;
-  onSave: (formData: IInvoice) => void
+  existingInvoice?: IInvoice;
+  onSave?: (formData: Partial<IInvoice>) => void
 }
