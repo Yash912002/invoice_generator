@@ -134,7 +134,7 @@ const ProfilePage = () => {
                 placeholder="Pune, Maharashtra"
               />
 
-              <TextareaField
+              <InputField
                 label="Phone"
                 name="phone"
                 icon={PhoneIcon}
