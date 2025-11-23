@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }: Props) => {
   if (!isAuthenticated) return <Navigate to="/login" replace />
 
   return (
-    <DashboardLayout>
+    <DashboardLayout activeMenu="">
       {children ? children : <Outlet />}
     </DashboardLayout>
   )
