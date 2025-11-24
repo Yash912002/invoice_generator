@@ -127,13 +127,8 @@ const Login = () => {
 
         if (token) {
           setSuccess("Login successful");
-
           login(response.data.data, token);
-
-          // Redirect based on role
-          setTimeout(() => {
-            window.location.href = "/dashboard";
-          }, 2000);
+          navigate("/dashboard");
         } else {
           setError(response.data.data.message || "Invalid credentials");
         }
