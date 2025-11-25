@@ -1,0 +1,1579 @@
+{
+	"info": {
+		"_postman_id": "dfe89c76-9e8a-407c-9b71-7da15d787592",
+		"name": "Invoice Generator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41081499"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test User2\",\r\n    \"email\": \"testuser2@gmail.com\",\r\n    \"password\": \"testuser2@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authURL}}/register",
+							"host": [
+								"{{authURL}}"
+							],
+							"path": [
+								"register"
+							]
+						},
+						"description": "## Register User Endpoint\n\nThis endpoint is used to register a new user in the system. It accepts user details and returns a response indicating the success of the registration process.\n\n### Request\n\n- **Method:** POST\n    \n- **URL:** `http://localhost:8000/api/auth/register`\n    \n\n#### Request Body\n\nThe request body must be in JSON format and should contain the following parameters:\n\n- **name** (string): The full name of the user.\n    \n- **email** (string): The email address of the user. This must be unique and valid.\n    \n- **password** (string): The password for the user's account. It should meet the security requirements set by the application.\n    \n\n**Example Request Body:**\n\n``` json\n{\n  \"name\": \"Test User\",\n  \"email\": \"testuser@gmail.com\",\n  \"password\": \"testuser@123\"\n}\n\n ```\n\n### Response\n\nThe response will be in JSON format and may contain the following fields:\n\n- **success** (boolean): Indicates whether the registration was successful.\n    \n- **message** (string): A message providing additional information about the registration process.\n    \n- **data** (object): Contains user details if registration is successful, including:\n    \n    - **_id** (string): The unique identifier for the user.\n        \n    - **name** (string): The name of the user.\n        \n    - **email** (string): The email of the user.\n        \n    - **token** (string): An authentication token for the user.\n        \n\n**Example Successful Response:**\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"_id\": \"user_id_value\",\n    \"name\": \"Test User\",\n    \"email\": \"testuser@gmail.com\",\n    \"token\": \"authentication_token\"\n  }\n}\n\n ```\n\n**Example Error Response:**\n\n``` json\n{\n  \"success\": false,\n  \"message\": \"Error message detailing the issue.\"\n}\n\n ```\n\n### Notes\n\n- Ensure that the email provided is unique and not already registered in the system.\n    \n- The password should adhere to the security policies defined by the application."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Test User\",\r\n    \"email\": \"testuser@gmail.com\",\r\n    \"password\": \"testuser@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "288"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"120-c4WKP60jxgQFqr/HybYj3Xgm8fs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 03:38:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"_id\": \"691552ab6dddb4d20fc45e7f\",\n        \"name\": \"Test User\",\n        \"email\": \"testuser@gmail.com\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU1MmFiNmRkZGI0ZDIwZmM0NWU3ZiIsImlhdCI6MTc2MzAwNTA5OSwiZXhwIjoxNzYzNjA5ODk5fQ.KKH-GdQNDbWCQLT1HvxluQjQHsmkXXBCo1NlJj0NI80\"\n    }\n}"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Test User\",\r\n    \"email\": \"testuser@gmail.com\",\r\n    \"password\": \"testuser@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-CB/81rUvOP4NEoRchGbNOg6sTao\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 03:39:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"sucess\": false,\n    \"message\": \"Email already in use\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"testuser@gmail.com\",\r\n    \"password\": \"testuser@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authURL}}/login",
+							"host": [
+								"{{authURL}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "### Login Endpoint\n\nThis endpoint allows users to authenticate by logging in with their email and password. Upon successful authentication, it returns user details along with a token for session management.\n\n#### Request\n\n- **Method:** POST\n    \n- **URL:** `{{baseURL}}/auth/login`\n    \n- **Content-Type:** application/json\n    \n\n##### Request Body\n\nThe request body must be a JSON object containing the following fields:\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| email | string | The user's email address. |\n| password | string | The user's password. |\n\n##### JSON Schema\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"email\": {\n      \"type\": \"string\",\n      \"format\": \"email\"\n    },\n    \"password\": {\n      \"type\": \"string\",\n      \"minLength\": 6\n    }\n  },\n  \"required\": [\"email\", \"password\"]\n}\n\n ```\n\n#### Response\n\n- **Status Code:** 200\n    \n- **Content-Type:** application/json\n    \n\n##### Response Body\n\nOn successful login, the response will be a JSON object with the following structure:\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| success | boolean | Indicates if the login was successful. |\n| data | object | Contains user information and token. |\n\nThe `data` object includes:\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| _id | string | User's unique identifier. |\n| name | string | User's name. |\n| email | string | User's email address. |\n| businessName | string | User's business name. |\n| address | string | User's address. |\n| phone | string | User's phone number. |\n| token | string | Authentication token for session management. |\n\n##### Example Response\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"_id\": \"\",\n    \"name\": \"\",\n    \"email\": \"\",\n    \"businessName\": \"\",\n    \"address\": \"\",\n    \"phone\": \"\",\n    \"token\": \"\"\n  }\n}\n\n ```\n\nThis endpoint is crucial for user authentication and provides the necessary information to manage user sessions effectively.\n\nThis endpoint is used to authenticate a user and obtain a session token for subsequent requests. By providing valid credentials, users can log in to their account.\n\n### Request\n\n- **Method:** POST\n    \n- **URL:** `{{baseURL}}/auth/login`\n    \n- **Content-Type:** application/json\n    \n\n#### Request Body Parameters\n\n- **email** (string): The email address associated with the user account.\n    \n- **password** (string): The password for the user account.\n    \n\n### Response\n\n- **Status Code:** 200\n    \n- **Content-Type:** application/json\n    \n\n#### Response Structure\n\nThe response will contain the following fields:\n\n- **success** (boolean): Indicates whether the login was successful.\n    \n- **data** (object): Contains user information and authentication token.\n    \n    - **_id** (string): The unique identifier for the user.\n        \n    - **name** (string): The name of the user.\n        \n    - **email** (string): The email address of the user.\n        \n    - **businessName** (string): The business name associated with the user.\n        \n    - **address** (string): The address of the user.\n        \n    - **phone** (string): The phone number of the user.\n        \n    - **token** (string): The authentication token for the session."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"testuser@gmail.com\",\r\n    \"password\": \"testuser@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/auth/login",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "330"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14a-EIyzA9ehUZwVGh93x4qIpszF/k0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 03:47:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"_id\": \"691552ab6dddb4d20fc45e7f\",\n        \"name\": \"Test User\",\n        \"email\": \"testuser@gmail.com\",\n        \"businessName\": \"\",\n        \"address\": \"\",\n        \"phone\": \"\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU1MmFiNmRkZGI0ZDIwZmM0NWU3ZiIsImlhdCI6MTc2MzAwNTY3MywiZXhwIjoxNzYzNjEwNDczfQ.KkAANh8m9JDUNUgtEdt6YXEGduuO71XNzVdvT1yehJ8\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU1MmFiNmRkZGI0ZDIwZmM0NWU3ZiIsImlhdCI6MTc2MzAwNTY3MywiZXhwIjoxNzYzNjEwNDczfQ.KkAANh8m9JDUNUgtEdt6YXEGduuO71XNzVdvT1yehJ8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{authURL}}/me",
+							"host": [
+								"{{authURL}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Profile Info",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/auth/me",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"auth",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "148"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"94-Qc7TNPkZJ8f6XOaaWBxlJgeZbzM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 03:55:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"_id\": \"691552ab6dddb4d20fc45e7f\",\n        \"name\": \"Test User\",\n        \"email\": \"testuser@gmail.com\",\n        \"businessName\": \"\",\n        \"address\": \"\",\n        \"phone\": \"\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU1MmFiNmRkZGI0ZDIwZmM0NWU3ZiIsImlhdCI6MTc2MzAwNTY3MywiZXhwIjoxNzYzNjEwNDczfQ.KkAANh8m9JDUNUgtEdt6YXEGduuO71XNzVdvT1yehJ8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Yash Bhavsar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{authURL}}/me",
+							"host": [
+								"{{authURL}}"
+							],
+							"path": [
+								"me"
+							]
+						},
+						"description": "## Update User Information\n\nThis endpoint allows authenticated users to update their personal information. The request updates the user's profile details, specifically the user's name.\n\n### Request\n\n- **Method**: PUT\n    \n- **URL**: `{{baseURL}}/auth/me`\n    \n- **Request Body**: The request should be sent with a JSON payload containing the following parameters:\n    \n    - `name` (string, required): The new name of the user.\n        \n    - `businessName`(string, optional): The new name of the business\n        \n    - `address`(string, optional): Updated address of the business location.\n        \n    - `phone` (string, optional ): Updated business phone number.\n        \n\n**Example Request Body**:\n\n``` json\n{\n  \"name\": \"Yash Bhavsar\"\n}\n\n ```\n\n### Response\n\nUpon a successful update, the API will return a response with the following structure:\n\n- **Status Code**: 200 OK\n    \n- **Content-Type**: application/json\n    \n- **Response Body**:\n    \n    - `success` (boolean): Indicates whether the update was successful.\n        \n    - `data` (object): Contains the updated user information with the following fields:\n        \n        - `_id` (string): The unique identifier of the user.\n            \n        - `name` (string): The updated name of the user.\n            \n        - `email` (string): The user's email address.\n            \n        - `businessName` (string): The name of the user's business, if applicable.\n            \n        - `address` (string): The user's address.\n            \n        - `phone` (string): The user's phone number.\n            \n\n**Example Response**:\n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"_id\": \"\",\n    \"name\": \"\",\n    \"email\": \"\",\n    \"businessName\": \"\",\n    \"address\": \"\",\n    \"phone\": \"\"\n  }\n}\n\n ```\n\n### Notes\n\n- Ensure that the user is authenticated before making this request."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Yash Bhavsar\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/auth/me",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"auth",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "151"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"97-SGfs1cl6R7zd0nPSYJK55/x/a+0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 03:58:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"_id\": \"691552ab6dddb4d20fc45e7f\",\n        \"name\": \"Yash Bhavsar\",\n        \"email\": \"testuser@gmail.com\",\n        \"businessName\": \"\",\n        \"address\": \"\",\n        \"phone\": \"\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Invoices",
+			"item": [
+				{
+					"name": "By ID",
+					"item": [
+						{
+							"name": "Get Invoice",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTZlMjhjMGE4MWU4NTFmODQxZmZlZCIsImlhdCI6MTc2MzY0ODc1NSwiZXhwIjoxNzY0MjUzNTU1fQ.uSHDU8waY13QdoRg2q11xfVtoz4p6E4IEhiOnzmQM5E",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{invoiceURL}}/6916ef421dd9948756f6dbc2",
+									"host": [
+										"{{invoiceURL}}"
+									],
+									"path": [
+										"6916ef421dd9948756f6dbc2"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Successful Unpaid Invoice Response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/invoices/69157cca88441e0af445b47f",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"invoices",
+												"69157cca88441e0af445b47f"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "991"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"3df-YH43cpEHr8tFHg4p9wJ5RD3L+oQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 13 Nov 2025 07:06:55 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Fetched the invoice successfully\",\n    \"data\": {\n        \"billFrom\": {\n            \"businessName\": \"PixelCraft Studios\",\n            \"email\": \"contact@pixelcraft.com\",\n            \"address\": \"22A Creative Lane, Bangalore, KA, India\",\n            \"phone\": \"+91 98765 43210\"\n        },\n        \"billTo\": {\n            \"clientName\": \"VisionTech Pvt Ltd\",\n            \"email\": \"billing@visiontech.in\",\n            \"address\": \"410 Tech Park, Pune, MH, India\",\n            \"phone\": \"+91 91234 56789\"\n        },\n        \"_id\": \"69157cca88441e0af445b47f\",\n        \"user\": {\n            \"_id\": \"691552ab6dddb4d20fc45e7f\",\n            \"name\": \"Yash Bhavsar\",\n            \"email\": \"testuser@gmail.com\"\n        },\n        \"invoiceNumber\": \"INV-2025-0012\",\n        \"invoiceDate\": \"2025-11-01T00:00:00.000Z\",\n        \"dueDate\": \"2025-11-15T00:00:00.000Z\",\n        \"items\": [\n            {\n                \"name\": \"UI/UX Design Services\",\n                \"quantity\": 10,\n                \"unitPrice\": 1500,\n                \"taxPercent\": 18,\n                \"total\": 17700,\n                \"_id\": \"69157cca88441e0af445b480\"\n            }\n        ],\n        \"notes\": \"Thank you for your business. Payment due within 14 days.\",\n        \"paymentTerms\": \"Net 14\",\n        \"status\": \"Unpaid\",\n        \"subtotal\": 15000,\n        \"taxTotal\": 2700,\n        \"total\": 17700,\n        \"createdAt\": \"2025-11-13T06:38:02.871Z\",\n        \"updatedAt\": \"2025-11-13T06:38:02.871Z\",\n        \"__v\": 0\n    }\n}"
+								},
+								{
+									"name": "Successful Paid Invoice Response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/invoices/69157e9ca81a7e3a3f09e357",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"invoices",
+												"69157e9ca81a7e3a3f09e357"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1148"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"47c-SpfdmUtfmxHHJ3XqDxMjzYt5sis\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 13 Nov 2025 07:09:05 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Fetched the invoice successfully\",\n    \"data\": {\n        \"billFrom\": {\n            \"businessName\": \"NovaByte Solutions\",\n            \"email\": \"accounts@novabyte.io\",\n            \"address\": \"55 Horizon Tower, Hyderabad, TS, India\",\n            \"phone\": \"+91 98123 65478\"\n        },\n        \"billTo\": {\n            \"clientName\": \"BlueOrbit Technologies\",\n            \"email\": \"finance@blueorbit.in\",\n            \"address\": \"1201 Skyline Plaza, Mumbai, MH, India\",\n            \"phone\": \"+91 90045 77219\"\n        },\n        \"_id\": \"69157e9ca81a7e3a3f09e357\",\n        \"user\": {\n            \"_id\": \"691552ab6dddb4d20fc45e7f\",\n            \"name\": \"Yash Bhavsar\",\n            \"email\": \"testuser@gmail.com\"\n        },\n        \"invoiceNumber\": \"INV-2025-0048\",\n        \"invoiceDate\": \"2025-10-20T00:00:00.000Z\",\n        \"dueDate\": \"2025-11-03T00:00:00.000Z\",\n        \"items\": [\n            {\n                \"name\": \"API Development Services\",\n                \"quantity\": 5,\n                \"unitPrice\": 2200,\n                \"taxPercent\": 18,\n                \"total\": 12980,\n                \"_id\": \"69157e9ca81a7e3a3f09e358\"\n            },\n            {\n                \"name\": \"Server Deployment & Maintenance\",\n                \"quantity\": 1,\n                \"unitPrice\": 8000,\n                \"taxPercent\": 18,\n                \"total\": 9440,\n                \"_id\": \"69157e9ca81a7e3a3f09e359\"\n            }\n        ],\n        \"notes\": \"Appreciate your timely payment. Looking forward to more collaborations.\",\n        \"paymentTerms\": \"Net 15\",\n        \"status\": \"Paid\",\n        \"subtotal\": 19000,\n        \"taxTotal\": 3420,\n        \"total\": 22420,\n        \"createdAt\": \"2025-11-13T06:45:48.195Z\",\n        \"updatedAt\": \"2025-11-13T06:45:48.195Z\",\n        \"__v\": 0\n    }\n}"
+								},
+								{
+									"name": "Temporary Invoice",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/invoices/691586a7790918a3368cf458",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"invoices",
+												"691586a7790918a3368cf458"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1014"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"3f6-taGxMyWeC0RkbI2KEjvMdDVl18s\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 13 Nov 2025 07:20:40 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Fetched the invoice successfully\",\n    \"data\": {\n        \"billFrom\": {\n            \"businessName\": \"Acme Corporation\",\n            \"email\": \"billing@acme.com\",\n            \"address\": \"123 Main Street, San Francisco, CA 94105, USA\",\n            \"phone\": \"+1 415-555-0198\"\n        },\n        \"billTo\": {\n            \"clientName\": \"TechNova Inc.\",\n            \"email\": \"accounts@technova.io\",\n            \"address\": \"742 Evergreen Terrace, Austin, TX 73301, USA\",\n            \"phone\": \"+1 512-555-0246\"\n        },\n        \"_id\": \"691586a7790918a3368cf458\",\n        \"user\": {\n            \"_id\": \"691552ab6dddb4d20fc45e7f\",\n            \"name\": \"Yash Bhavsar\",\n            \"email\": \"testuser@gmail.com\"\n        },\n        \"invoiceNumber\": \"INV-2025-0193\",\n        \"invoiceDate\": \"2025-11-05T00:00:00.000Z\",\n        \"dueDate\": \"2025-11-20T00:00:00.000Z\",\n        \"items\": [\n            {\n                \"name\": \"Cloud Infrastructure Setup\",\n                \"quantity\": 1,\n                \"unitPrice\": 12500,\n                \"taxPercent\": 10,\n                \"total\": 13750,\n                \"_id\": \"691586a7790918a3368cf459\"\n            }\n        ],\n        \"notes\": \"Payment received via ACH transfer. Thank you for your prompt response.\",\n        \"paymentTerms\": \"Net 15\",\n        \"status\": \"Paid\",\n        \"subtotal\": 12500,\n        \"taxTotal\": 1250,\n        \"total\": 13750,\n        \"createdAt\": \"2025-11-13T07:20:07.043Z\",\n        \"updatedAt\": \"2025-11-13T07:20:07.043Z\",\n        \"__v\": 0\n    }\n}"
+								},
+								{
+									"name": "Invoice Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/invoices/691586a7790918a3368cf458",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"invoices",
+												"691586a7790918a3368cf458"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "47"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2f-za0D6cnoSOzT2lhuNB7kU2/E3D8\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 13 Nov 2025 07:22:27 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": false,\n    \"message\": \"Invoice not found\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Invoice",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{invoiceURL}}/69157e9ca81a7e3a3f09e357",
+									"host": [
+										"{{invoiceURL}}"
+									],
+									"path": [
+										"69157e9ca81a7e3a3f09e357"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Invoice",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU1MmFiNmRkZGI0ZDIwZmM0NWU3ZiIsImlhdCI6MTc2MzAwNTY3MywiZXhwIjoxNzYzNjEwNDczfQ.KkAANh8m9JDUNUgtEdt6YXEGduuO71XNzVdvT1yehJ8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{invoiceURL}}/691586a7790918a3368cf458",
+									"host": [
+										"{{invoiceURL}}"
+									],
+									"path": [
+										"691586a7790918a3368cf458"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Success Response",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/invoices/691586a7790918a3368cf458",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"invoices",
+												"691586a7790918a3368cf458"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "57"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"39-BWlnWaojc8gcQ7GC8Dc9g4RelFg\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 13 Nov 2025 07:22:19 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": true,\n    \"message\": \"Invoice deleted successfully\"\n}"
+								},
+								{
+									"name": "Invoice Not Found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/invoices/691586a7790918a3368cf458",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"invoices",
+												"691586a7790918a3368cf458"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": null,
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "47"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2f-za0D6cnoSOzT2lhuNB7kU2/E3D8\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 13 Nov 2025 07:23:01 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"success\": false,\n    \"message\": \"Invoice not found\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Get Invoices",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTZlMjhjMGE4MWU4NTFmODQxZmZlZCIsImlhdCI6MTc2MzY0ODc1NSwiZXhwIjoxNzY0MjUzNTU1fQ.uSHDU8waY13QdoRg2q11xfVtoz4p6E4IEhiOnzmQM5E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{invoiceURL}}",
+							"host": [
+								"{{invoiceURL}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseURL}}/invoices",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"invoices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2078"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"81e-0t9AsMHdAtDKomOg1Dz62IqDRS4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 07:00:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Fetched all the invoices successfully\",\n    \"data\": [\n        {\n            \"billFrom\": {\n                \"businessName\": \"PixelCraft Studios\",\n                \"email\": \"contact@pixelcraft.com\",\n                \"address\": \"22A Creative Lane, Bangalore, KA, India\",\n                \"phone\": \"+91 98765 43210\"\n            },\n            \"billTo\": {\n                \"clientName\": \"VisionTech Pvt Ltd\",\n                \"email\": \"billing@visiontech.in\",\n                \"address\": \"410 Tech Park, Pune, MH, India\",\n                \"phone\": \"+91 91234 56789\"\n            },\n            \"_id\": \"69157cca88441e0af445b47f\",\n            \"user\": {\n                \"_id\": \"691552ab6dddb4d20fc45e7f\",\n                \"name\": \"Yash Bhavsar\",\n                \"email\": \"testuser@gmail.com\"\n            },\n            \"invoiceNumber\": \"INV-2025-0012\",\n            \"invoiceDate\": \"2025-11-01T00:00:00.000Z\",\n            \"dueDate\": \"2025-11-15T00:00:00.000Z\",\n            \"items\": [\n                {\n                    \"name\": \"UI/UX Design Services\",\n                    \"quantity\": 10,\n                    \"unitPrice\": 1500,\n                    \"taxPercent\": 18,\n                    \"total\": 17700,\n                    \"_id\": \"69157cca88441e0af445b480\"\n                }\n            ],\n            \"notes\": \"Thank you for your business. Payment due within 14 days.\",\n            \"paymentTerms\": \"Net 14\",\n            \"status\": \"Unpaid\",\n            \"subtotal\": 15000,\n            \"taxTotal\": 2700,\n            \"total\": 17700,\n            \"createdAt\": \"2025-11-13T06:38:02.871Z\",\n            \"updatedAt\": \"2025-11-13T06:38:02.871Z\",\n            \"__v\": 0\n        },\n        {\n            \"billFrom\": {\n                \"businessName\": \"NovaByte Solutions\",\n                \"email\": \"accounts@novabyte.io\",\n                \"address\": \"55 Horizon Tower, Hyderabad, TS, India\",\n                \"phone\": \"+91 98123 65478\"\n            },\n            \"billTo\": {\n                \"clientName\": \"BlueOrbit Technologies\",\n                \"email\": \"finance@blueorbit.in\",\n                \"address\": \"1201 Skyline Plaza, Mumbai, MH, India\",\n                \"phone\": \"+91 90045 77219\"\n            },\n            \"_id\": \"69157e9ca81a7e3a3f09e357\",\n            \"user\": {\n                \"_id\": \"691552ab6dddb4d20fc45e7f\",\n                \"name\": \"Yash Bhavsar\",\n                \"email\": \"testuser@gmail.com\"\n            },\n            \"invoiceNumber\": \"INV-2025-0048\",\n            \"invoiceDate\": \"2025-10-20T00:00:00.000Z\",\n            \"dueDate\": \"2025-11-03T00:00:00.000Z\",\n            \"items\": [\n                {\n                    \"name\": \"API Development Services\",\n                    \"quantity\": 5,\n                    \"unitPrice\": 2200,\n                    \"taxPercent\": 18,\n                    \"total\": 12980,\n                    \"_id\": \"69157e9ca81a7e3a3f09e358\"\n                },\n                {\n                    \"name\": \"Server Deployment & Maintenance\",\n                    \"quantity\": 1,\n                    \"unitPrice\": 8000,\n                    \"taxPercent\": 18,\n                    \"total\": 9440,\n                    \"_id\": \"69157e9ca81a7e3a3f09e359\"\n                }\n            ],\n            \"notes\": \"Appreciate your timely payment. Looking forward to more collaborations.\",\n            \"paymentTerms\": \"Net 15\",\n            \"status\": \"Paid\",\n            \"subtotal\": 19000,\n            \"taxTotal\": 3420,\n            \"total\": 22420,\n            \"createdAt\": \"2025-11-13T06:45:48.195Z\",\n            \"updatedAt\": \"2025-11-13T06:45:48.195Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Invoice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU1MmFiNmRkZGI0ZDIwZmM0NWU3ZiIsImlhdCI6MTc2MzAwNTY3MywiZXhwIjoxNzYzNjEwNDczfQ.KkAANh8m9JDUNUgtEdt6YXEGduuO71XNzVdvT1yehJ8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"invoiceNumber\": \"INV-2025-0193\",\r\n    \"invoiceDate\": \"2025-11-05T00:00:00.000Z\",\r\n    \"dueDate\": \"2025-11-20T00:00:00.000Z\",\r\n    \"billFrom\": {\r\n        \"businessName\": \"Acme Corporation\",\r\n        \"email\": \"billing@acme.com\",\r\n        \"address\": \"123 Main Street, San Francisco, CA 94105, USA\",\r\n        \"phone\": \"+1 415-555-0198\"\r\n    },\r\n    \"billTo\": {\r\n        \"clientName\": \"TechNova Inc.\",\r\n        \"email\": \"accounts@technova.io\",\r\n        \"address\": \"742 Evergreen Terrace, Austin, TX 73301, USA\",\r\n        \"phone\": \"+1 512-555-0246\"\r\n    },\r\n    \"items\": [\r\n        {\r\n            \"name\": \"Cloud Infrastructure Setup\",\r\n            \"quantity\": 1,\r\n            \"unitPrice\": 12500,\r\n            \"taxPercent\": 10,\r\n            \"total\": 13750\r\n        }\r\n    ],\r\n    \"notes\": \"Payment received via ACH transfer. Thank you for your prompt response.\",\r\n    \"paymentTerms\": \"Net 15\",\r\n    \"status\": \"Paid\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{invoiceURL}}",
+							"host": [
+								"{{invoiceURL}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Unpaid Invoice",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"invoiceNumber\": \"INV-2025-0012\",\r\n    \"invoiceDate\": \"2025-11-01T00:00:00.000Z\",\r\n    \"dueDate\": \"2025-11-15T00:00:00.000Z\",\r\n    \"billFrom\": {\r\n        \"businessName\": \"PixelCraft Studios\",\r\n        \"email\": \"contact@pixelcraft.com\",\r\n        \"address\": \"22A Creative Lane, Bangalore, KA, India\",\r\n        \"phone\": \"+91 98765 43210\"\r\n    },\r\n    \"billTo\": {\r\n        \"clientName\": \"VisionTech Pvt Ltd\",\r\n        \"email\": \"billing@visiontech.in\",\r\n        \"address\": \"410 Tech Park, Pune, MH, India\",\r\n        \"phone\": \"+91 91234 56789\"\r\n    },\r\n    \"items\": [\r\n        {\r\n            \"name\": \"UI/UX Design Services\",\r\n            \"quantity\": 10,\r\n            \"unitPrice\": 1500,\r\n            \"taxPercent\": 18,\r\n            \"total\": 17700\r\n        }\r\n    ],\r\n    \"notes\": \"Thank you for your business. Payment due within 14 days.\",\r\n    \"paymentTerms\": \"Net 14\",\r\n    \"status\": \"Unpaid\",\r\n    \"subtotal\": 15000,\r\n    \"taxTotal\": 2700,\r\n    \"total\": 17700,\r\n    \"createdAt\": \"2025-11-01T00:00:00.000Z\",\r\n    \"updatedAt\": \"2025-11-05T00:00:00.000Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/invoices",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"invoices"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1115"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45b-D3Cs9BQCu3F4ENTpLK4IlM9/bQw\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 06:38:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Invoice created successfully\",\n    \"data\": {\n        \"user\": {\n            \"_id\": \"691552ab6dddb4d20fc45e7f\",\n            \"name\": \"Yash Bhavsar\",\n            \"email\": \"testuser@gmail.com\",\n            \"businessName\": \"\",\n            \"address\": \"\",\n            \"phone\": \"\",\n            \"createdAt\": \"2025-11-13T03:38:19.559Z\",\n            \"updatedAt\": \"2025-11-13T03:58:56.110Z\",\n            \"__v\": 0\n        },\n        \"invoiceNumber\": \"INV-2025-0012\",\n        \"invoiceDate\": \"2025-11-01T00:00:00.000Z\",\n        \"dueDate\": \"2025-11-15T00:00:00.000Z\",\n        \"billFrom\": {\n            \"businessName\": \"PixelCraft Studios\",\n            \"email\": \"contact@pixelcraft.com\",\n            \"address\": \"22A Creative Lane, Bangalore, KA, India\",\n            \"phone\": \"+91 98765 43210\"\n        },\n        \"billTo\": {\n            \"clientName\": \"VisionTech Pvt Ltd\",\n            \"email\": \"billing@visiontech.in\",\n            \"address\": \"410 Tech Park, Pune, MH, India\",\n            \"phone\": \"+91 91234 56789\"\n        },\n        \"items\": [\n            {\n                \"name\": \"UI/UX Design Services\",\n                \"quantity\": 10,\n                \"unitPrice\": 1500,\n                \"taxPercent\": 18,\n                \"total\": 17700,\n                \"_id\": \"69157cca88441e0af445b480\"\n            }\n        ],\n        \"notes\": \"Thank you for your business. Payment due within 14 days.\",\n        \"paymentTerms\": \"Net 14\",\n        \"status\": \"Unpaid\",\n        \"subtotal\": 15000,\n        \"taxTotal\": 2700,\n        \"total\": 17700,\n        \"_id\": \"69157cca88441e0af445b47f\",\n        \"createdAt\": \"2025-11-13T06:38:02.871Z\",\n        \"updatedAt\": \"2025-11-13T06:38:02.871Z\",\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "Successful Paid Invoice",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"invoiceNumber\": \"INV-2025-0048\",\r\n    \"invoiceDate\": \"2025-10-20T00:00:00.000Z\",\r\n    \"dueDate\": \"2025-11-03T00:00:00.000Z\",\r\n    \"billFrom\": {\r\n        \"businessName\": \"NovaByte Solutions\",\r\n        \"email\": \"accounts@novabyte.io\",\r\n        \"address\": \"55 Horizon Tower, Hyderabad, TS, India\",\r\n        \"phone\": \"+91 98123 65478\"\r\n    },\r\n    \"billTo\": {\r\n        \"clientName\": \"BlueOrbit Technologies\",\r\n        \"email\": \"finance@blueorbit.in\",\r\n        \"address\": \"1201 Skyline Plaza, Mumbai, MH, India\",\r\n        \"phone\": \"+91 90045 77219\"\r\n    },\r\n    \"items\": [\r\n        {\r\n            \"name\": \"API Development Services\",\r\n            \"quantity\": 5,\r\n            \"unitPrice\": 2200,\r\n            \"taxPercent\": 18,\r\n            \"total\": 12980\r\n        },\r\n        {\r\n            \"name\": \"Server Deployment & Maintenance\",\r\n            \"quantity\": 1,\r\n            \"unitPrice\": 8000,\r\n            \"taxPercent\": 18,\r\n            \"total\": 9440\r\n        }\r\n    ],\r\n    \"notes\": \"Appreciate your timely payment. Looking forward to more collaborations.\",\r\n    \"paymentTerms\": \"Net 15\",\r\n    \"status\": \"Paid\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/invoices",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"invoices"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1272"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f8-WvdNi8/LnAi4eIfpLqdXOvI2S1w\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 06:45:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Invoice created successfully\",\n    \"data\": {\n        \"user\": {\n            \"_id\": \"691552ab6dddb4d20fc45e7f\",\n            \"name\": \"Yash Bhavsar\",\n            \"email\": \"testuser@gmail.com\",\n            \"businessName\": \"\",\n            \"address\": \"\",\n            \"phone\": \"\",\n            \"createdAt\": \"2025-11-13T03:38:19.559Z\",\n            \"updatedAt\": \"2025-11-13T03:58:56.110Z\",\n            \"__v\": 0\n        },\n        \"invoiceNumber\": \"INV-2025-0048\",\n        \"invoiceDate\": \"2025-10-20T00:00:00.000Z\",\n        \"dueDate\": \"2025-11-03T00:00:00.000Z\",\n        \"billFrom\": {\n            \"businessName\": \"NovaByte Solutions\",\n            \"email\": \"accounts@novabyte.io\",\n            \"address\": \"55 Horizon Tower, Hyderabad, TS, India\",\n            \"phone\": \"+91 98123 65478\"\n        },\n        \"billTo\": {\n            \"clientName\": \"BlueOrbit Technologies\",\n            \"email\": \"finance@blueorbit.in\",\n            \"address\": \"1201 Skyline Plaza, Mumbai, MH, India\",\n            \"phone\": \"+91 90045 77219\"\n        },\n        \"items\": [\n            {\n                \"name\": \"API Development Services\",\n                \"quantity\": 5,\n                \"unitPrice\": 2200,\n                \"taxPercent\": 18,\n                \"total\": 12980,\n                \"_id\": \"69157e9ca81a7e3a3f09e358\"\n            },\n            {\n                \"name\": \"Server Deployment & Maintenance\",\n                \"quantity\": 1,\n                \"unitPrice\": 8000,\n                \"taxPercent\": 18,\n                \"total\": 9440,\n                \"_id\": \"69157e9ca81a7e3a3f09e359\"\n            }\n        ],\n        \"notes\": \"Appreciate your timely payment. Looking forward to more collaborations.\",\n        \"paymentTerms\": \"Net 15\",\n        \"status\": \"Paid\",\n        \"subtotal\": 19000,\n        \"taxTotal\": 3420,\n        \"total\": 22420,\n        \"_id\": \"69157e9ca81a7e3a3f09e357\",\n        \"createdAt\": \"2025-11-13T06:45:48.195Z\",\n        \"updatedAt\": \"2025-11-13T06:45:48.195Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "AI",
+			"item": [
+				{
+					"name": "Parse text",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU1MmFiNmRkZGI0ZDIwZmM0NWU3ZiIsImlhdCI6MTc2MzAwNTY3MywiZXhwIjoxNzYzNjEwNDczfQ.KkAANh8m9JDUNUgtEdt6YXEGduuO71XNzVdvT1yehJ8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"This invoice is for ClientCorp Inc., located at 742 Evergreen Terrace, Springfield, USA. You can contact them at clientcorp@email.com. The invoice number is INV-2025-014, issued on November 1, 2025, and it’s due by November 10, 2025.The services provided include 2 hours of design work billed at $150 per hour, and 1 logo design project priced at $800. The subtotal for the work is $1100, with a 5% tax amounting to $55, bringing the total to $1155.Thank you for your business and prompt payment.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{aiURL}}/parse-text",
+							"host": [
+								"{{aiURL}}"
+							],
+							"path": [
+								"parse-text"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"Client: BlueSky Studio Email: hello@blueskystudio.com Work: Website redesign - 10 hours @ $80/hr Total: $800 Due: 2025-11-20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/ai/parse-text",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"ai",
+										"parse-text"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "171"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ab-xtXCRpcAUGj8PUAQqFbuxaYdAZ4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 14:17:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"clientName\": \"BlueSky Studio\",\n        \"email\": \"hello@blueskystudio.com\",\n        \"address\": null,\n        \"items\": [\n            {\n                \"name\": \"Website redesign\",\n                \"quantity\": 10,\n                \"unitPrice\": 80\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "Success Response 2",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"This invoice is for ClientCorp Inc., located at 742 Evergreen Terrace, Springfield, USA. You can contact them at clientcorp@email.com. The invoice number is INV-2025-014, issued on November 1, 2025, and it’s due by November 10, 2025.The services provided include 2 hours of design work billed at $150 per hour, and 1 logo design project priced at $800. The subtotal for the work is $1100, with a 5% tax amounting to $55, bringing the total to $1155.Thank you for your business and prompt payment.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/ai/parse-text",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"ai",
+										"parse-text"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "261"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"105-2tVoJ5g5rczYlqjIbbB07UnmjKs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 14:19:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"clientName\": \"ClientCorp Inc.\",\n        \"email\": \"clientcorp@email.com\",\n        \"address\": \"742 Evergreen Terrace, Springfield, USA\",\n        \"items\": [\n            {\n                \"name\": \"design work\",\n                \"quantity\": 2,\n                \"unitPrice\": 150\n            },\n            {\n                \"name\": \"logo design project\",\n                \"quantity\": 1,\n                \"unitPrice\": 800\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Generate Reminder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU1MmFiNmRkZGI0ZDIwZmM0NWU3ZiIsImlhdCI6MTc2MzAwNTY3MywiZXhwIjoxNzYzNjEwNDczfQ.KkAANh8m9JDUNUgtEdt6YXEGduuO71XNzVdvT1yehJ8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"invoiceId\": \"69157cca88441e0af445b47f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{aiURL}}/generate-reminder",
+							"host": [
+								"{{aiURL}}"
+							],
+							"path": [
+								"generate-reminder"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"invoiceId\": \"69157cca88441e0af445b47f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/ai/generate-reminder",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"ai",
+										"generate-reminder"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "643"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"283-b2e4mON0AxJd/OMFlw0Ae4uVRGA\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 13:47:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Reminder email generated successfully\",\n    \"reminderText\": \"Subject: Friendly Payment Reminder: Invoice INV-2025-0012 for VisionTech Pvt Ltd\\n\\nDear VisionTech Team,\\n\\nHope you're having a productive week.\\n\\nThis is a friendly reminder regarding Invoice INV-2025-0012, for the amount of ₹17,700.00. This invoice is due for payment on 15/11/2025.\\n\\nWe just wanted to send a quick heads-up in advance. Please let us know if you have any questions or require any further assistance with this payment.\\n\\nThank you for your continued business.\\n\\nBest regards,\\n\\n[Your Name]\\nAccounting Assistant\\n[Your Company Name]\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Dashboard Summary",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTU1MmFiNmRkZGI0ZDIwZmM0NWU3ZiIsImlhdCI6MTc2MzAwNTY3MywiZXhwIjoxNzYzNjEwNDczfQ.KkAANh8m9JDUNUgtEdt6YXEGduuO71XNzVdvT1yehJ8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{aiURL}}/dashboard-summary",
+							"host": [
+								"{{aiURL}}"
+							],
+							"path": [
+								"dashboard-summary"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseURL}}/ai/dashboard-summary",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"ai",
+										"dashboard-summary"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "362"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16a-Ewob5opB92h7HVpyrFdMq5U28EM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 13:38:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Dashboard summary generated successfully.\",\n    \"data\": {\n        \"insights\": [\n            \"It's encouraging to see ₹22,420 successfully collected from a recent invoice, indicating healthy payments coming in!\",\n            \"To further strengthen your cash flow, let's gently follow up on the ₹17,700 outstanding for invoice INV-2025-0012 to bring that payment in soon.\"\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": ""
+		},
+		{
+			"key": "authURL",
+			"value": ""
+		},
+		{
+			"key": "invoiceURL",
+			"value": ""
+		},
+		{
+			"key": "aiURL",
+			"value": ""
+		}
+	]
+}
